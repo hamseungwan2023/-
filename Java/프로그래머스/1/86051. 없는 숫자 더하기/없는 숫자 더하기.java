@@ -7,10 +7,8 @@ class Solution {
         for (int i = 0; i < numbers.length; i++) {
             a += numbers[i];
         }
-        for (int i = 0; i < numList.length; i++) {
-            b += numList[i];
-        }
-        answer = b - a;
+        
+        answer = 45 - a;
         return answer;
     }
 }
