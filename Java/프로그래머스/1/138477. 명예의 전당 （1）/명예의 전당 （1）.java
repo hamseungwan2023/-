@@ -1,24 +1,20 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+import java.util.*;
 class Solution {
     public int[] solution(int k, int[] score) {
         int[] answer = new int[score.length];
         List<Integer> arr = new ArrayList<>();
+        
         for (int i = 0; i < score.length; i++) {
-            if (arr.size() < k) {
+            if(arr.size() < k) {
                 arr.add(score[i]);
-                arr.sort((a, b) -> a - b);
-                answer[i] = arr.get(0);
-            } else if (arr.get(0) > score[i]) {
-                answer[i] = arr.get(0);
-            } else {
-                arr.remove(0);
-                arr.add(score[i]);
-                arr.sort((a, b) -> a - b);
-                answer[i] = arr.get(0);
             }
+            arr.sort(Comparator.reverseOrder());
+            if(arr.size() == k && i >= k && arr.get(k -1) < score[i]) {
+                arr.remove(k - 1);
+                arr.add(score[i]);
+            }
+            arr.sort(Comparator.reverseOrder());
+            answer[i] = arr.get(arr.size() - 1);
         }
         return answer;
     }
